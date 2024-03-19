@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc23fc42-179e-42ac-93be-6b60f2c7ebad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/co.edu.cue.chatSBO.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ChatMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ClientChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ClientConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ConfigWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ServerChat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ELIANA/Desktop/chatV2-master",
+    "last_opened_file_path": "C:/Users/ELIANA/IdeaProjects/co.edu.cue.chatSBO",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -103,6 +92,7 @@
       <updated>1710603976186</updated>
       <workItem from="1710603977228" duration="1805000" />
       <workItem from="1710618094579" duration="16236000" />
+      <workItem from="1710817229935" duration="1400000" />
     </task>
     <servers />
   </component>
