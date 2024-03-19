@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.logging.Logger;
 
 public class ServerConnection implements ActionListener {
-    private Logger log = Logger.getLogger(String.valueOf(ServerConnection.class));
+    private Logger logger = Logger.getLogger(String.valueOf(ServerConnection.class));
     private Socket socket;
     private JTextField tfMessage;
     private String user;
@@ -21,9 +21,9 @@ public class ServerConnection implements ActionListener {
         try {
             this.outData = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
-            // log.error("Error al crear el stream de salida : " + e.getMessage());
+            logger.info("Error al crear el stream de salida : " + e.getMessage());
         } catch (NullPointerException e) {
-            // log.error("El socket no se creo correctamente. ");
+             logger.info("El socket no se creo correctamente. ");
         }
     }
 
@@ -33,7 +33,7 @@ public class ServerConnection implements ActionListener {
             outData.writeUTF(user + ": " + tfMessage.getText());
             tfMessage.setText("");
         } catch (IOException exp) {
-            //log.error("Error al intentar enviar un mensaje: " + exp.getMessage());
+            logger.info("Error al intentar enviar un mensaje: " + exp.getMessage());
         }
     }
 }

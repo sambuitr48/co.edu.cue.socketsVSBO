@@ -75,9 +75,9 @@ public class ClientChat extends JFrame {
         try {
             socket = new Socket(host, port);
         } catch (UnexpectedException e) {
-            //  logger.error("No se ha podido conectar con el servidor (" + e.getMessage() + ").");
+             logger.info("No se ha podido conectar con el servidor (" + e.getMessage() + ").");
         } catch (IOException exp) {
-            // logger.error("No se ha podido conectar con el servidor (" + exp.getMessage() + ").");
+             logger.info("No se ha podido conectar con el servidor (" + exp.getMessage() + ").");
         }
         //Accion para el botón enviar
         btSend.addActionListener(new ServerConnection(socket, tfMessage, user));
@@ -89,9 +89,9 @@ public class ClientChat extends JFrame {
             try {
                 inputData = new DataInputStream(socket.getInputStream());
             } catch (IOException e) {
-                // logger.error("Error al crear el stream de entrada: " + e.getMessage());
+                logger.info("Error al crear el stream de entrada: " + e.getMessage());
             } catch (NullPointerException exp) {
-                // logger.error("El socket no se creo correctamente. ");
+                logger.info("El socket no se creo correctamente. ");
             }
             //Bucle infinito que recibe mensajes del servidor
             boolean connected = true;
@@ -100,10 +100,10 @@ public class ClientChat extends JFrame {
                     message = inputData.readUTF();
                     chatMessage.append(message + System.lineSeparator() );
                 } catch (IOException e) {
-                    //  logger.error("Error al leer del stream de entrada: " + e.getMessage());
+                    logger.info("Error al leer del stream de entrada: " + e.getMessage());
                     connected = false;
                 } catch (NullPointerException exp) {
-                    // logger.error("El socket no se creo correctamente. ");
+                    logger.info("El socket no se creo correctamente. ");
                     connected = false;
                 }
             }

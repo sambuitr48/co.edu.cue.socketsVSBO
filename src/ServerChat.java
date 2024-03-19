@@ -28,13 +28,13 @@ public class ServerChat {
                 // falta la conexion del cliente
             }
         } catch (IOException e) {
-            //logger.error("Error al cerrar el servidor: " + e.getMessage());
+            logger.info("Error al cerrar el servidor: " + e.getMessage());
         } finally {
             try {
                socket.close();
                server.close();
             } catch (IOException e) {
-                // log.error("Error al cerrar el servidor: " + ex.getMessage());
+                 logger.info("Error al cerrar el servidor: " + e.getMessage());
             }
         }
     }
