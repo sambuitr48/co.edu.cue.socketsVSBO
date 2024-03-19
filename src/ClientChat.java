@@ -75,9 +75,9 @@ public class ClientChat extends JFrame {
         try {
             socket = new Socket(host, port);
         } catch (UnexpectedException e) {
-             logger.info("No se ha podido conectar con el servidor (" + e.getMessage() + ").");
+             logger.info("Could not connect to the server (" + e.getMessage() + ").");
         } catch (IOException exp) {
-             logger.info("No se ha podido conectar con el servidor (" + exp.getMessage() + ").");
+             logger.info("Could not connect to the server (" + exp.getMessage() + ").");
         }
         //Accion para el botón enviar
         btSend.addActionListener(new ServerConnection(socket, tfMessage, user));
@@ -89,9 +89,9 @@ public class ClientChat extends JFrame {
             try {
                 inputData = new DataInputStream(socket.getInputStream());
             } catch (IOException e) {
-                logger.info("Error al crear el stream de entrada: " + e.getMessage());
+                logger.info("Error creating input stream: " + e.getMessage());
             } catch (NullPointerException exp) {
-                logger.info("El socket no se creo correctamente. ");
+                logger.info("The socket was not created correctly. ");
             }
             //Bucle infinito que recibe mensajes del servidor
             boolean connected = true;
@@ -100,10 +100,10 @@ public class ClientChat extends JFrame {
                     message = inputData.readUTF();
                     chatMessage.append(message + System.lineSeparator() );
                 } catch (IOException e) {
-                    logger.info("Error al leer del stream de entrada: " + e.getMessage());
+                    logger.info("Error reading from input stream: " + e.getMessage());
                     connected = false;
                 } catch (NullPointerException exp) {
-                    logger.info("El socket no se creo correctamente. ");
+                    logger.info("The socket was not created correctly. ");
                     connected = false;
                 }
             }
@@ -117,5 +117,3 @@ public class ClientChat extends JFrame {
         clientChat.receiveServerMessages();
     }
 }
-
-

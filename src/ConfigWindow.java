@@ -13,14 +13,13 @@ public class ConfigWindow extends JDialog {
     public ConfigWindow(JFrame padre) {
         super(padre, "init config", true);
 
-        JLabel userLb = new JLabel("User");
-        JLabel hostLb = new JLabel("Host");
-        JLabel portLb = new JLabel("Port");
+        JLabel userLb = new JLabel("User:");
+        JLabel hostLb = new JLabel("Host:");
+        JLabel portLb = new JLabel("Port:");
 
         tfUser = new JTextField();
         tfHost = new JTextField("localhost");
         tfPort = new JTextField("5050"); //Revisar pq puse el 5050
-
         JButton acceptBt = new JButton("Accept");
         acceptBt.addActionListener(new ActionListener() {
             @Override

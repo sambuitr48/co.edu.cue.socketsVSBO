@@ -22,7 +22,7 @@ public class ClientConnection extends Thread implements Observer {
             inputData = new DataInputStream(socket.getInputStream());
             outData = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
-            logger.info("Error al crear los stream de entrada y salida : " + e.getMessage());
+            logger.info("Error creating input/out streams : " + e.getMessage());
         }
     }
     @Override
@@ -47,7 +47,7 @@ public class ClientConnection extends Thread implements Observer {
                     inputData.close();
                     outData.close();
                 } catch (IOException exp) {
-                    logger.info("Error al cerrar los stream de entrada y salida :" + exp.getMessage());
+                    logger.info("Error closing input/out streams :" + exp.getMessage());
                 }
             }
         }
@@ -58,7 +58,7 @@ public class ClientConnection extends Thread implements Observer {
             //Envia el mensaje al cliente
             outData.writeUTF(arg.toString());
         } catch (IOException e) {
-            logger.info("Error al enviar mensaje al cliente (" + e.getMessage() + ").");
+            logger.info("Error sending message to client (" + e.getMessage() + ").");
         }
     }
 }

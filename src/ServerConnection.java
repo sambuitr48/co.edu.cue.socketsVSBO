@@ -21,9 +21,9 @@ public class ServerConnection implements ActionListener {
         try {
             this.outData = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
-            logger.info("Error al crear el stream de salida : " + e.getMessage());
+            logger.info("Error. Out Stream was not created.: " + e.getMessage());
         } catch (NullPointerException e) {
-             logger.info("El socket no se creo correctamente. ");
+             logger.info("Socket was not created correctly. ");
         }
     }
 
@@ -31,9 +31,10 @@ public class ServerConnection implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             outData.writeUTF(user + ": " + tfMessage.getText());
+            System.out.println("********************************+"+tfMessage.getText());
             tfMessage.setText("");
         } catch (IOException exp) {
-            logger.info("Error al intentar enviar un mensaje: " + exp.getMessage());
+            logger.info("Error sending message: " + exp.getMessage());
         }
     }
 }
