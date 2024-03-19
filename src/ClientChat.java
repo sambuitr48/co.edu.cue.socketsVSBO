@@ -1,0 +1,121 @@
+import javax.swing.*;
+import java.awt.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.rmi.UnexpectedException;
+import java.util.logging.Logger;
+
+public class ClientChat extends JFrame {
+    private Logger logger = Logger.getLogger(String.valueOf(ClientChat.class));
+    private JTextArea chatMessage;
+    private Socket socket;
+    private int port;
+    private String host;
+    private String user;
+
+    public ClientChat() {
+        super("Client Chat");
+
+        //Elementos de la ventana
+        chatMessage = new JTextArea();
+        chatMessage.setEnabled(false); // El area de mensajes del chat no se debe poder editar
+        chatMessage.setLineWrap(true); // Las lineas se parten al llegar al ancho del TextArea
+        chatMessage.setWrapStyleWord(true); // Las lineas se parten entre palabras (por los espacios en blanco)
+        JScrollPane scrollChatMessage = new JScrollPane(chatMessage);
+        JTextField tfMessage = new JTextField("");
+        JButton btSend = new JButton("Send");
+
+        //Colocación de los componentes en la ventana
+        Container container = this.getContentPane();
+        container.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(20,20,20,20);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        container.add(scrollChatMessage, gbc);
+
+        // Restaura valores por defecto
+        gbc.gridwidth = 1;
+        gbc.weighty = 0;
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0, 20, 20, 20);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        container.add(tfMessage, gbc);
+
+        // Restaura valores por defecto
+        gbc.weightx = 0;
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        container.add(btSend, gbc);
+
+        this.setBounds(400, 100, 400, 500);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Vemtana de configuración inicial
+        ConfigWindow configWindow = new ConfigWindow(this);
+        host = configWindow.getHost();
+        port = configWindow.getPort();
+        user = configWindow.getUser();
+
+        logger.info("You are trying to connect to " + host + " in the port " + port + " with the username: " + user + ".");
+
+        //se crea el socket para conectar con  el servidor del chat
+        try {
+            socket = new Socket(host, port);
+        } catch (UnexpectedException e) {
+            //  logger.error("No se ha podido conectar con el servidor (" + e.getMessage() + ").");
+        } catch (IOException exp) {
+            // logger.error("No se ha podido conectar con el servidor (" + exp.getMessage() + ").");
+        }
+        //Accion para el botón enviar
+        btSend.addActionListener(new ServerConnection(socket, tfMessage, user));
+        }
+        public void receiveServerMessages() {
+        //Obtiene el flujo de entrada del socket
+            DataInputStream inputData = null;
+            String message;
+            try {
+                inputData = new DataInputStream(socket.getInputStream());
+            } catch (IOException e) {
+                // logger.error("Error al crear el stream de entrada: " + e.getMessage());
+            } catch (NullPointerException exp) {
+                // logger.error("El socket no se creo correctamente. ");
+            }
+            //Bucle infinito que recibe mensajes del servidor
+            boolean connected = true;
+            while (connected) {
+                try {
+                    message = inputData.readUTF();
+                    chatMessage.append(message + System.lineSeparator() );
+                } catch (IOException e) {
+                    //  logger.error("Error al leer del stream de entrada: " + e.getMessage());
+                    connected = false;
+                } catch (NullPointerException exp) {
+                    // logger.error("El socket no se creo correctamente. ");
+                    connected = false;
+                }
+            }
+        }
+
+    public static void main(String[] args) {
+        // Carga el archivo de configuracion de log4J
+        //PropertyConfigurator.configure("log4j.properties");
+
+        ClientChat clientChat =  new ClientChat();
+        clientChat.receiveServerMessages();
+    }
+}
+
+
